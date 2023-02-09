@@ -24,6 +24,7 @@ class Login extends React.Component {
 
   render() {
     const { userEmail, userName } = this.state;
+    const { history } = this.props;
     const number = 3;
     const disabled = userEmail
       .includes('@') && userEmail.includes('.com') && userName.length > number;
@@ -60,7 +61,14 @@ class Login extends React.Component {
           >
             Play
           </button>
-          <button>Configurações</button>
+          <button
+            data-testid="btn-settings"
+            type="button"
+            onClick={ () => { history.push('/settings'); } }
+          >
+            Configurações
+
+          </button>
         </div>
       </div>
     );
