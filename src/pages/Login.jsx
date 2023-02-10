@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-<<<<<<< HEAD
-import fetchApi from '../utils/fetchAPi';
-=======
+
 import { connect } from 'react-redux';
 import { actionCreatorAddLogin } from '../redux/actions';
->>>>>>> main-group-21
 
 class Login extends React.Component {
   state = {
@@ -21,18 +18,11 @@ class Login extends React.Component {
   };
 
   handleClick = async () => {
-<<<<<<< HEAD
-    const { history } = this.props;
-    const BASE_URL = 'https://opentdb.com/api_token.php?command=request';
-    const token = await fetchApi(BASE_URL);
-    localStorage.setItem('token', token.token);
-=======
     const { history, dispatch } = this.props;
     const response = await fetch('https://opentdb.com/api_token.php?command=request');
     const data = await response.json();
     localStorage.setItem('token', data.token);
     dispatch(actionCreatorAddLogin(this.state));
->>>>>>> main-group-21
     history.push('/gamer');
   };
 
