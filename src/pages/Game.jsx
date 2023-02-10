@@ -9,17 +9,63 @@ class Game extends React.Component {
     questions: [],
     counter: 0,
     isCorrect: null,
+    seconds: 30,
+    timeOver: false,
   };
 
+  // componentDidMount() {
+  // this.handleMount();
+  /* this.timer(); */
+  /* const number = 1000;
+    this.interval = setInterval(() => {
+      this.setState((prevState) => ({
+        seconds: prevState.seconds - 1,
+      }));
+    }, number);
+  } */
   componentDidMount() {
     this.handleMount();
+    this.decreaseCounter();
   }
+
+  componentDidUpdate() {
+    this.stopCountdown();
+  }
+
+  /* timer = () => {
+    const number = 1000;
+    this.interval = setInterval(() => {
+      this.setState((prevState) => ({
+        seconds: prevState.seconds - 1,
+      }));
+    }, number);
+  }; */
+  decreaseCounter = () => {
+    const interval = 1000;
+    this.interval = setInterval(() => {
+      const { seconds } = this.state;
+      if (seconds > 0) {
+        this.setState((prevState) => ({ seconds: prevState.seconds - 1 }));
+      } else {
+        this.setState({
+          timeOver: true,
+        });
+      }
+    }, interval);
+  };
 
   shuffledAnswers = (corret, incorret) => {
     const array = [corret, ...incorret];
     const shuffleNumber = 0.5;
     const shuffled = array.sort(() => Math.random() - shuffleNumber);
     return shuffled;
+  };
+
+  stopCountdown = () => {
+    const { timeOver } = this.state;
+    if (timeOver === true) {
+      clearInterval(this.interval);
+    }
   };
 
   handleMount = async () => {
@@ -55,7 +101,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { questions, counter, isCorrect } = this.state;
+    const { questions, counter, isCorrect, seconds } = this.state;
     return (
       <>
         <Header />
@@ -68,6 +114,11 @@ class Game extends React.Component {
               <h3 data-testid="question-text">
                 { question.question}
               </h3>
+              <h1>
+                {seconds}
+                {' '}
+                seconds left
+              </h1>
               <div data-testid="answer-options">
                 {question.correct_answer
                   && question.answers.map((answer, i) => (
@@ -79,6 +130,7 @@ class Game extends React.Component {
                         data-testid="correct-answer"
                         onClick={ (event) => this.handleAnswerColors(event) }
                         style={ isCorrect && { border: '3px solid rgb(6, 240, 15)' } }
+                        disabled={ seconds <= 0 }
                       >
                         {answer}
                       </button>
@@ -90,6 +142,7 @@ class Game extends React.Component {
                         data-testid={ `wrong-answer-${i}` }
                         onClick={ (event) => this.handleAnswerColors(event) }
                         style={ isCorrect && { border: '3px solid red' } }
+                        disabled={ seconds <= 0 }
                       >
                         {answer}
                       </button>
