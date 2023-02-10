@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
+import questions from './questions';
 
 const rootReducer = combineReducers({
-  // user,
-  // wallet,
+  questions,
 });
 
 export default rootReducer;

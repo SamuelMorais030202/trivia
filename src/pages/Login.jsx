@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import fetchApi from '../utils/fetchAPi';
 
 class Login extends React.Component {
   state = {
@@ -16,9 +17,9 @@ class Login extends React.Component {
 
   handleClick = async () => {
     const { history } = this.props;
-    const response = await fetch('https://opentdb.com/api_token.php?command=request');
-    const data = await response.json();
-    localStorage.setItem('token', data.token);
+    const BASE_URL = 'https://opentdb.com/api_token.php?command=request';
+    const token = await fetchApi(BASE_URL);
+    localStorage.setItem('token', token.token);
     history.push('/gamer');
   };
 
