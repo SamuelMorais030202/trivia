@@ -79,9 +79,21 @@ describe('Testando a página de Login', () => {
 
   it('Será avaliado se o botão está habilitado, quando os campos forem preenchidos e se ao clicar a página é redirecionada para a página de game.', async () => {
     const mockData = {
-      response_code: 0,
-      response_message:"Token Generated Successfully!",
-      token:"f00cb469ce38726ee00a7c6836761b0a4fb808181a125dcde6d50a9f3c9127b6"
+      response_code:0,
+      results:[
+        {
+          category:"Entertainment: Video Games",
+          type:"multiple",
+          difficulty:"easy",
+          question:"What is the first weapon you acquire in Half-Life?",
+          correct_answer:"A crowbar",
+          incorrect_answers:[
+              "A pistol",
+              "The H.E.V suit",
+              "Your fists"
+          ]
+        }
+      ]
     }
 
     jest.spyOn(global, 'fetch').mockResolvedValue({
