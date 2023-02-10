@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import fetchApi from '../utils/fetchAPi';
 import Header from '../components/Header';
+import '../App.css';
 
 class Game extends React.Component {
   state = {
     questions: [],
     counter: 0,
+    isCorrect: null,
   };
 
   componentDidMount() {
@@ -43,8 +45,17 @@ class Game extends React.Component {
     }
   };
 
+  handleAnswerColors = ({ target }) => {
+    if (target.className === 'correct') {
+      this.setState({ isCorrect: true });
+    }
+    if (target.className === 'wrong') {
+      this.setState({ isCorrect: false });
+    }
+  };
+
   render() {
-    const { questions, counter } = this.state;
+    const { questions, counter, isCorrect } = this.state;
     return (
       <>
         <Header />
@@ -58,18 +69,32 @@ class Game extends React.Component {
                 { question.question}
               </h3>
               <div data-testid="answer-options">
-                {question.answers.map((answer) => (
-                  <button
-                    key={ answer }
-                    type="button"
-                    data-testid={
-                      answer === question.correct_answer ? 'correct-answer'
-                        : `wrong-answer-${index}`
-                    }
-                  >
-                    {answer}
-                  </button>
-                ))}
+                {question.correct_answer
+                  && question.answers.map((answer, i) => (
+                    answer === question.correct_answer ? (
+                      <button
+                        className="correct"
+                        key={ answer }
+                        type="button"
+                        data-testid="correct-answer"
+                        onClick={ (event) => this.handleAnswerColors(event) }
+                        style={ isCorrect && { border: '3px solid rgb(6, 240, 15)' } }
+                      >
+                        {answer}
+                      </button>
+                    ) : (
+                      <button
+                        className="correct"
+                        key={ answer }
+                        type="button"
+                        data-testid={ `wrong-answer-${i}` }
+                        onClick={ (event) => this.handleAnswerColors(event) }
+                        style={ isCorrect && { border: '3px solid red' } }
+                      >
+                        {answer}
+                      </button>
+                    )
+                  ))}
               </div>
             </div>
           ))}
