@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import fetchApi from '../utils/fetchAPi';
+import Header from '../components/Header';
 
 class Game extends React.Component {
   state = {
@@ -45,32 +46,35 @@ class Game extends React.Component {
   render() {
     const { questions, counter } = this.state;
     return (
-      <form>
-        {questions.map((question, index) => index === counter && (
-          <div key={ question.category }>
-            <h2 data-testid="question-category">
-              { question.category}
-            </h2>
-            <h3 data-testid="question-text">
-              { question.question}
-            </h3>
-            <div data-testid="answer-options">
-              {question.answers.map((answer) => (
-                <button
-                  key={ answer }
-                  type="button"
-                  data-testid={
-                    answer === question.correct_answer ? 'correct-answer'
-                      : `wrong-answer-${index}`
-                  }
-                >
-                  {answer}
-                </button>
-              ))}
+      <>
+        <Header />
+        <form>
+          {questions.map((question, index) => index === counter && (
+            <div key={ question.category }>
+              <h2 data-testid="question-category">
+                { question.category}
+              </h2>
+              <h3 data-testid="question-text">
+                { question.question}
+              </h3>
+              <div data-testid="answer-options">
+                {question.answers.map((answer) => (
+                  <button
+                    key={ answer }
+                    type="button"
+                    data-testid={
+                      answer === question.correct_answer ? 'correct-answer'
+                        : `wrong-answer-${index}`
+                    }
+                  >
+                    {answer}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-      </form>
+          ))}
+        </form>
+      </>
     );
   }
 }
