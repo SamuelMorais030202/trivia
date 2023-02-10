@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import fetchApi from '../utils/fetchAPi';
 import Header from '../components/Header';
 import '../App.css';
+
+import { actionScorePlayer } from '../redux/actions';
 
 class Game extends React.Component {
   state = {
@@ -11,6 +14,7 @@ class Game extends React.Component {
     isCorrect: null,
     seconds: 30,
     timeOver: false,
+    level: 0,
   };
 
   // componentDidMount() {
@@ -91,7 +95,21 @@ class Game extends React.Component {
     }
   };
 
-  handleAnswerColors = ({ target }) => {
+  playerScore = async (difficulty) => {
+    const { dispatch } = this.props;
+    const levelValue = difficulty;
+    if (levelValue === 'hard') await this.setState({ level: 3 });
+    if (levelValue === 'medium') await this.setState({ level: 2 });
+    if (levelValue === 'easy') await this.setState({ level: 1 });
+    const { level, seconds } = this.state;
+    const num = 10;
+    const number = level > 0 ? num : 0;
+    const calculation = number + (level * seconds);
+    dispatch(actionScorePlayer(calculation));
+  };
+
+  handleAnswerColors = ({ target }, difficulty) => {
+    this.playerScore(difficulty);
     if (target.className === 'correct') {
       this.setState({ isCorrect: true });
     }
@@ -128,7 +146,8 @@ class Game extends React.Component {
                         key={ answer }
                         type="button"
                         data-testid="correct-answer"
-                        onClick={ (event) => this.handleAnswerColors(event) }
+                        onClick={ (event) => this
+                          .handleAnswerColors(event, question.difficulty) }
                         style={ isCorrect && { border: '3px solid rgb(6, 240, 15)' } }
                         disabled={ seconds <= 0 }
                       >
@@ -161,6 +180,7 @@ Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default Game;
+export default connect()(Game);
