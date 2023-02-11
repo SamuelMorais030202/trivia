@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import fetchApi from '../utils/fetchAPi';
 import Header from '../components/Header';
 import '../App.css';
+import { actionScorePlayer, actionSetAssertions } from '../redux/actions';
 
-import { actionScorePlayer } from '../redux/actions';
-
+const MAX_QUESTIONS = 5;
+const INTERVAL = 1000;
 class Game extends React.Component {
   state = {
     questions: [],
@@ -16,47 +17,30 @@ class Game extends React.Component {
     timeOver: false,
     level: 0,
     disableBtn: false,
+    assertions: 0,
+    nextButton: false,
   };
 
-  // componentDidMount() {
-  // this.handleMount();
-  /* this.timer(); */
-  /* const number = 1000;
-    this.interval = setInterval(() => {
-      this.setState((prevState) => ({
-        seconds: prevState.seconds - 1,
-      }));
-    }, number);
-  } */
   componentDidMount() {
     this.handleMount();
     this.decreaseCounter();
   }
 
   componentDidUpdate() {
-    this.stopCountdown();
+    const { seconds, nextButton } = this.state;
+    if (seconds <= 0 || nextButton) { this.stopCountdown(); }
   }
 
-  /* timer = () => {
-    const number = 1000;
-    this.interval = setInterval(() => {
-      this.setState((prevState) => ({
-        seconds: prevState.seconds - 1,
-      }));
-    }, number);
-  }; */
   decreaseCounter = () => {
-    const interval = 1000;
     this.interval = setInterval(() => {
       const { seconds } = this.state;
-      if (seconds > 0) {
-        this.setState((prevState) => ({ seconds: prevState.seconds - 1 }));
-      } else {
+      this.setState((prevState) => ({ seconds: prevState.seconds - 1 }));
+      if (seconds === 0) {
         this.setState({
           timeOver: true,
         });
       }
-    }, interval);
+    }, INTERVAL);
   };
 
   shuffledAnswers = (corret, incorret) => {
@@ -96,8 +80,15 @@ class Game extends React.Component {
     }
   };
 
-  playerScore = async (difficulty) => {
+  playerScore = async (difficulty, correct, answer) => {
     const { dispatch } = this.props;
+    const correctAnswer = answer;
+    const currentAnswer = correct;
+    const { assertions } = this.state;
+    if ((currentAnswer && correctAnswer !== undefined)
+    && currentAnswer === correctAnswer) {
+      dispatch(actionSetAssertions(assertions + 1));
+    }
     const levelValue = difficulty;
     if (levelValue === 'hard') await this.setState({ level: 3 });
     if (levelValue === 'medium') await this.setState({ level: 2 });
@@ -109,8 +100,8 @@ class Game extends React.Component {
     dispatch(actionScorePlayer(calculation));
   };
 
-  handleAnswerColors = ({ target }, difficulty) => {
-    this.playerScore(difficulty);
+  handleAnswerColors = ({ target }, difficulty, correct, answer) => {
+    this.playerScore(difficulty, correct, answer);
     this.setState({ disableBtn: true });
     this.setState({ timeOver: true });
     if (target.className === 'correct') {
@@ -119,38 +110,57 @@ class Game extends React.Component {
     if (target.className === 'wrong') {
       this.setState({ isCorrect: false });
     }
+    this.setState({
+      nextButton: true,
+    });
+  };
+
+  nextQuestion = () => {
+    this.setState({
+      seconds: 30,
+      disableBtn: false,
+      isCorrect: null,
+      level: 0,
+    });
+    this.decreaseCounter();
+    this.setState({
+      nextButton: false,
+    });
   };
 
   render() {
-    const { questions, counter, isCorrect, seconds, disableBtn } = this.state;
+    const { questions, counter, isCorrect, seconds, disableBtn, nextButton } = this.state;
     return (
       <>
         <Header />
         <form>
-          {questions.map((question, index) => index === counter && (
-            <div key={ question.category }>
+          {questions.map((_, index) => index === counter && (
+            <div key={ questions[counter].category }>
               <h2 data-testid="question-category">
-                { question.category}
+                { questions[counter].category}
               </h2>
               <h3 data-testid="question-text">
-                { question.question}
+                { questions[counter].question}
               </h3>
               <h1>
                 {seconds}
-                {' '}
                 seconds left
               </h1>
               <div data-testid="answer-options">
-                {question.correct_answer
-                  && question.answers.map((answer, i) => (
-                    answer === question.correct_answer ? (
+                {questions[counter].correct_answer
+                  && questions[counter].answers.map((answer, i) => (
+                    answer === questions[counter].correct_answer ? (
                       <button
                         className="correct"
                         key={ answer }
                         type="button"
                         data-testid="correct-answer"
-                        onClick={ (event) => this
-                          .handleAnswerColors(event, question.difficulty) }
+                        onClick={ (event) => this.handleAnswerColors(
+                          event,
+                          questions[counter].difficulty,
+                          questions[counter].correct_answer,
+                          answer,
+                        ) }
                         style={ isCorrect && { border: '3px solid rgb(6, 240, 15)' } }
                         disabled={ seconds <= 0 || disableBtn }
                       >
@@ -173,17 +183,35 @@ class Game extends React.Component {
               </div>
             </div>
           ))}
+          {
+            nextButton
+              && (
+                <button
+                  data-testid="btn-next"
+                  type="button"
+                  onClick={ () => {
+                    const { history } = this.props;
+                    if (counter === MAX_QUESTIONS - 1) {
+                      history.push('/feedback');
+                    } else {
+                      this.setState((prevState) => ({ counter: prevState.counter + 1 }));
+                      this.nextQuestion();
+                    }
+                  } }
+                >
+                  Next
+                </button>
+              )
+          }
         </form>
       </>
     );
   }
 }
-
 Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
-
 export default connect()(Game);
