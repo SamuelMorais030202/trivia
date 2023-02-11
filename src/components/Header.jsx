@@ -8,7 +8,7 @@ class Header extends React.Component {
     const { name, email, score } = this.props;
     const hashEmail = md5(email).toString();
     return (
-      <div>
+      <header>
         <img
           src={ `https://www.gravatar.com/avatar/${hashEmail}` }
           alt="avatar"
@@ -22,13 +22,13 @@ class Header extends React.Component {
         <p data-testid="header-score">
           { score }
         </p>
-      </div>
+      </header>
     );
   }
 }
 const mapStateToProps = (state) => ({
-  name: state.user.userName,
-  email: state.user.userEmail,
+  name: state.player.userName,
+  email: state.player.userEmail,
   score: state.player.score,
 });
 

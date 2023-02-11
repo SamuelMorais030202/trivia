@@ -1,35 +1,73 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import md5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import { actionClearRedux } from '../redux/actions/index';
 
+const INITIAL_STORE = {
+  user: {
+    userName: '',
+    userEmail: '',
+  },
+  player: {
+    score: 0,
+    assertions: 0,
+  },
+};
 class Feedback extends React.Component {
+  handlePlay = () => {
+    const { history, dispatch } = this.props;
+    history.push('/');
+    dispatch(actionClearRedux(INITIAL_STORE));
+  };
+
   render() {
-    const { assertions } = this.props;
+    const { assertions, score, history: { push } } = this.props;
     const lowestScoreFeedback = 3;
 
     return (
       <div>
         <Header />
+        <h1
+          data-testid="header-text"
+        >
+          Feedback
+        </h1>
         <p data-testid="feedback-text">
           {assertions < lowestScoreFeedback
             ? 'Could be better...' : 'Well Done!'}
         </p>
+        <p data-testid="feedback-total-score">{ score }</p>
+        <p data-testid="feedback-total-question">{ assertions }</p>
+        <button
+          data-testid="btn-play-again"
+          onClick={ () => this.handlePlay() }
+        >
+          Play Again
+        </button>
+        <button
+          data-testid="btn-ranking"
+          onClick={ () => push('/ranking') }
+        >
+          Ranking
+        </button>
       </div>
     );
   }
 }
 
+Feedback.propTypes = {
+  assertions: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
 const mapStateToProps = (state) => ({
-  name: state.user.userName,
-  email: state.user.userEmail,
   assertions: state.player.assertions,
   score: state.player.score,
 });
-
-Feedback.propTypes = {
-  assertions: PropTypes.number.isRequired,
-};
 
 export default connect(mapStateToProps)(Feedback);

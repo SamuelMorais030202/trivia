@@ -208,10 +208,12 @@ class Game extends React.Component {
     );
   }
 }
+
 Game.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
+
 export default connect()(Game);
