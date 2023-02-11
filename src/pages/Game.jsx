@@ -15,6 +15,7 @@ class Game extends React.Component {
     seconds: 30,
     timeOver: false,
     level: 0,
+    disableBtn: false,
   };
 
   // componentDidMount() {
@@ -110,6 +111,8 @@ class Game extends React.Component {
 
   handleAnswerColors = ({ target }, difficulty) => {
     this.playerScore(difficulty);
+    this.setState({ disableBtn: true });
+    this.setState({ timeOver: true });
     if (target.className === 'correct') {
       this.setState({ isCorrect: true });
     }
@@ -119,7 +122,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { questions, counter, isCorrect, seconds } = this.state;
+    const { questions, counter, isCorrect, seconds, disableBtn } = this.state;
     return (
       <>
         <Header />
@@ -149,7 +152,7 @@ class Game extends React.Component {
                         onClick={ (event) => this
                           .handleAnswerColors(event, question.difficulty) }
                         style={ isCorrect && { border: '3px solid rgb(6, 240, 15)' } }
-                        disabled={ seconds <= 0 }
+                        disabled={ seconds <= 0 || disableBtn }
                       >
                         {answer}
                       </button>
@@ -161,7 +164,7 @@ class Game extends React.Component {
                         data-testid={ `wrong-answer-${i}` }
                         onClick={ (event) => this.handleAnswerColors(event) }
                         style={ isCorrect && { border: '3px solid red' } }
-                        disabled={ seconds <= 0 }
+                        disabled={ seconds <= 0 || disableBtn }
                       >
                         {answer}
                       </button>
