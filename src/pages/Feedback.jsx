@@ -21,8 +21,14 @@ class Feedback extends React.Component {
     dispatch(actionClearRedux(INITIAL_STORE));
   };
 
+  handleranking = () => {
+    const { history, dispatch } = this.props;
+    history.push('/ranking');
+    dispatch(actionClearRedux());
+  };
+
   render() {
-    const { assertions, score, history: { push } } = this.props;
+    const { assertions, score } = this.props;
     const lowestScoreFeedback = 3;
 
     return (
@@ -47,7 +53,7 @@ class Feedback extends React.Component {
         </button>
         <button
           data-testid="btn-ranking"
-          onClick={ () => push('/ranking') }
+          onClick={ () => this.handleranking() }
         >
           Ranking
         </button>
