@@ -192,6 +192,12 @@ class Game extends React.Component {
                   onClick={ () => {
                     const { history } = this.props;
                     if (counter === MAX_QUESTIONS - 1) {
+                      const { userName, score } = this.props;
+                      let userData = localStorage.getItem('ranking');
+                      userData = userData ? JSON.parse(userData) : [];
+                      userData.push({ userName, score });
+                      userData.sort((a, b) => b.score - a.score);
+                      localStorage.setItem('ranking', JSON.stringify(userData));
                       history.push('/feedback');
                     } else {
                       this.setState((prevState) => ({ counter: prevState.counter + 1 }));
@@ -214,6 +220,13 @@ Game.propTypes = {
     push: PropTypes.func,
   }).isRequired,
   dispatch: PropTypes.func.isRequired,
+  userName: PropTypes.string.isRequired,
+  score: PropTypes.number.isRequired,
 };
 
-export default connect()(Game);
+const mapStateToProps = (state) => ({
+  userName: state.player.userName,
+  score: state.player.score,
+});
+
+export default connect(mapStateToProps)(Game);
