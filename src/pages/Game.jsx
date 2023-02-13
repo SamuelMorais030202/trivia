@@ -5,6 +5,8 @@ import fetchApi from '../utils/fetchAPi';
 import Header from '../components/Header';
 import '../App.css';
 import { actionScorePlayer, actionSetAssertions } from '../redux/actions';
+import './style/Game.css';
+import logo from '../images/trivia.png';
 
 const MAX_QUESTIONS = 5;
 const INTERVAL = 1000;
@@ -126,23 +128,26 @@ class Game extends React.Component {
   render() {
     const { questions, counter, answered, seconds, disableBtn, nextButton } = this.state;
     return (
-      <>
+      <div className="main-game">
         <Header />
-        <form>
+        <form className="form-game">
           {questions.map((_, index) => index === counter && (
-            <div key={ questions[counter].category }>
-              <h2 data-testid="question-category">
-                { questions[counter].category}
-              </h2>
-              <h3 data-testid="question-text">
-                { questions[counter].question}
-              </h3>
-              <h1 data-testid="timer">
-                {seconds}
-                {' '}
-                seconds left
-              </h1>
-              <div data-testid="answer-options">
+            <div key={ questions[counter].category } className="questions">
+              <div className="description-quetions">
+                <img src={ logo } alt="imagme" />
+                <h2 data-testid="question-category" className="question-category">
+                  { questions[counter].category}
+                </h2>
+                <h3 data-testid="question-text" className="question-text">
+                  { questions[counter].question}
+                </h3>
+                <h4 data-testid="timer" className="timer">
+                  {seconds}
+                  {' '}
+                  seconds left
+                </h4>
+              </div>
+              <div data-testid="answer-options" className="options">
                 {questions[counter].correct_answer
                   && questions[counter].answers.map((answer, i) => (
                     answer === questions[counter].correct_answer ? (
@@ -156,7 +161,9 @@ class Game extends React.Component {
                           questions[counter].correct_answer,
                           answer,
                         ) }
-                        style={ answered && { border: '3px solid rgb(6, 240, 15)' } }
+                        style={ answered && {
+                          border: '3px solid rgb(6, 240, 15)',
+                          background: 'rgb(6, 240, 15)' } }
                         disabled={ seconds <= 0 || disableBtn }
                       >
                         {answer}
@@ -168,7 +175,8 @@ class Game extends React.Component {
                         type="button"
                         data-testid={ `wrong-answer-${i}` }
                         onClick={ () => this.handleAnswerColors() }
-                        style={ answered && { border: '3px solid red' } }
+                        style={ answered && {
+                          border: '3px solid red', background: 'red' } }
                         disabled={ seconds <= 0 || disableBtn }
                       >
                         {answer}
@@ -183,6 +191,7 @@ class Game extends React.Component {
               && (
                 <button
                   data-testid="btn-next"
+                  className="next"
                   type="button"
                   onClick={ () => {
                     const { history } = this.props;
@@ -205,7 +214,7 @@ class Game extends React.Component {
               )
           }
         </form>
-      </>
+      </div>
     );
   }
 }
