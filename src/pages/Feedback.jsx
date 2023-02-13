@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { actionClearRedux } from '../redux/actions/index';
+import './style/Feedback.css';
+import trivia from '../images/trivia.png';
 
 const INITIAL_STORE = {
   user: {
@@ -30,33 +32,53 @@ class Feedback extends React.Component {
   render() {
     const { assertions, score } = this.props;
     const lowestScoreFeedback = 3;
+    const testClass = assertions < lowestScoreFeedback ? 'worst' : 'better';
 
     return (
-      <div>
+      <div className="main-feedback">
         <Header />
-        <h1
-          data-testid="header-text"
-        >
-          Feedback
-        </h1>
-        <p data-testid="feedback-text">
-          {assertions < lowestScoreFeedback
-            ? 'Could be better...' : 'Well Done!'}
-        </p>
-        <p data-testid="feedback-total-score">{ score }</p>
-        <p data-testid="feedback-total-question">{ assertions }</p>
-        <button
-          data-testid="btn-play-again"
-          onClick={ () => this.handlePlay() }
-        >
-          Play Again
-        </button>
-        <button
-          data-testid="btn-ranking"
-          onClick={ () => this.handleranking() }
-        >
-          Ranking
-        </button>
+        <img src={ trivia } alt="trivia imagem" className="img" />
+        <div className="feedback">
+          <h1
+            data-testid="header-text"
+          >
+            Feedback
+          </h1>
+          <p data-testid="feedback-text" className={ testClass }>
+            {assertions < lowestScoreFeedback
+              ? 'Could be better...' : 'Well Done!'}
+          </p>
+          <p data-testid="feedback-total-question" className="p">
+            Você acertou:
+            {' '}
+            { assertions }
+            {' '}
+            pontos!
+          </p>
+          <p data-testid="feedback-total-score" className="p">
+            Um total de:
+            {' '}
+            { score }
+            {' '}
+            pontos
+          </p>
+        </div>
+        <div className="container-buttons">
+          <button
+            data-testid="btn-play-again"
+            className="again"
+            onClick={ () => this.handlePlay() }
+          >
+            Play Again
+          </button>
+          <button
+            data-testid="btn-ranking"
+            className="btn-ranking"
+            onClick={ () => this.handleranking() }
+          >
+            Ranking
+          </button>
+        </div>
       </div>
     );
   }
