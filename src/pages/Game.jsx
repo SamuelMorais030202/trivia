@@ -12,7 +12,7 @@ class Game extends React.Component {
   state = {
     questions: [],
     counter: 0,
-    isCorrect: null,
+    answered: null,
     seconds: 30,
     timeOver: false,
     level: 0,
@@ -100,16 +100,11 @@ class Game extends React.Component {
     dispatch(actionScorePlayer(calculation));
   };
 
-  handleAnswerColors = ({ target }, difficulty, correct, answer) => {
+  handleAnswerColors = (difficulty, correct, answer) => {
     this.playerScore(difficulty, correct, answer);
     this.setState({ disableBtn: true });
     this.setState({ timeOver: true });
-    if (target.className === 'correct') {
-      this.setState({ isCorrect: true });
-    }
-    if (target.className === 'wrong') {
-      this.setState({ isCorrect: false });
-    }
+    this.setState({ answered: true });
     this.setState({
       nextButton: true,
     });
@@ -119,7 +114,7 @@ class Game extends React.Component {
     this.setState({
       seconds: 30,
       disableBtn: false,
-      isCorrect: null,
+      answered: null,
       level: 0,
     });
     this.decreaseCounter();
@@ -129,7 +124,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { questions, counter, isCorrect, seconds, disableBtn, nextButton } = this.state;
+    const { questions, counter, answered, seconds, disableBtn, nextButton } = this.state;
     return (
       <>
         <Header />
@@ -142,8 +137,9 @@ class Game extends React.Component {
               <h3 data-testid="question-text">
                 { questions[counter].question}
               </h3>
-              <h1>
+              <h1 data-testid="timer">
                 {seconds}
+                {' '}
                 seconds left
               </h1>
               <div data-testid="answer-options">
@@ -155,13 +151,12 @@ class Game extends React.Component {
                         key={ answer }
                         type="button"
                         data-testid="correct-answer"
-                        onClick={ (event) => this.handleAnswerColors(
-                          event,
+                        onClick={ () => this.handleAnswerColors(
                           questions[counter].difficulty,
                           questions[counter].correct_answer,
                           answer,
                         ) }
-                        style={ isCorrect && { border: '3px solid rgb(6, 240, 15)' } }
+                        style={ answered && { border: '3px solid rgb(6, 240, 15)' } }
                         disabled={ seconds <= 0 || disableBtn }
                       >
                         {answer}
@@ -172,8 +167,8 @@ class Game extends React.Component {
                         key={ answer }
                         type="button"
                         data-testid={ `wrong-answer-${i}` }
-                        onClick={ (event) => this.handleAnswerColors(event) }
-                        style={ isCorrect && { border: '3px solid red' } }
+                        onClick={ () => this.handleAnswerColors() }
+                        style={ answered && { border: '3px solid red' } }
                         disabled={ seconds <= 0 || disableBtn }
                       >
                         {answer}
