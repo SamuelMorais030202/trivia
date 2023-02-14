@@ -1,25 +1,25 @@
 .main-ranking {
+  align-items: center;
   background-image: url('../../images/background.png');
+  display: flex;
   background-size: cover;
   height: 100vh;
-  display: flex;
-  align-items: center;
   flex-direction: column;
   justify-content: center;
 }
 
 .main-ranking img {
   height: 180px;
-  width: 200px;
   margin-bottom: 28px;
+  width: 200px;
 }
 
 .ranking-game {
-  background: #FFF;
-  width: 439px;
-  padding: 10px;
+  background: white;
   border-radius: 10px;
   box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 439px;
 }
 
 .ranking-game h1 {
@@ -31,41 +31,41 @@
 
 .ranking-game button {
   background: #2fc18c;
-  height: 35px;
-  width: 386px;
-  margin-top: 50px;
   border: none;
+  color: white;
+  height: 35px;
+  margin-top: 50px;
+  width: 386px;
   border-radius: 5px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: Epilogue, sans-serif;
-  font-style: normal;
+  font-family: 'Epilogue', 'sans-serif';
   font-size: 16px;
+  font-style: normal;
   font-weight: 700;
-  color: #FFF;
   line-height: 150%;
 }
 
 .players {
-  display: flex;
   align-items: center;
+  display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
 .players div {
+  align-items: center;
   background: #ebebeb;
-  height: 45px;
-  width: 332px;
   border-radius: 100px;
   display: flex;
-  align-items: center;
+  height: 45px;
+  width: 332px;
   justify-content: space-around;
 }
 
 .players div h4 {
-  font-family: "Epilogue", sans-serif;
-  font-style: normal;
+  font-family: 'Epilogue', 'sans-serif';
   font-size: 16px;
+  font-style: normal;
   font-weight: 400;
   line-height: 150%;
 }
