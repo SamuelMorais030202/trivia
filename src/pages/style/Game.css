@@ -1,83 +1,83 @@
 .header {
-  background-color: white;
-  height: 15vh;
-  width: 100vw;
-  display: flex;
-  justify-content: flex-end;
-  gap: 55px;
   align-items: center;
+  background-color: white;
+  display: flex;
+  gap: 55px;
+  height: 15vh;
+  justify-content: flex-end;
+  width: 100vw;
 }
 
 .score {
-  margin-right: 60px;
-  display: flex;
   align-items: center;
+  display: flex;
   gap: 8px;
+  margin-right: 60px;
 }
 
 .user {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 
 .user-image {
-  width: 40px;
-  height: 40px;
   border-radius: 50%;
+  height: 40px;
+  width: 40px;
 }
 
 .estrela {
-  width: 20px;
   height: 20px;
+  width: 20px;
 }
 
 .form-game {
-  width: 100vw;
-  height: 85vh;
   background-image: url('../../images/background.png');
   background-size: cover;
+  height: 85vh;
+  width: 100vw;
 }
 
 .questions {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   gap: 80px;
+  justify-content: center;
 }
 
 .description-quetions {
-  font-family: 'Epilogue';
+  background: white;
+  border-radius: 10px;
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  font-family: 'Epilogue' 'keyword';
   font-style: normal;
   font-size: 16px;
   font-weight: 400;
   height: 278px;
-  width: 449px;
-  padding: 12px;
-  background: white;
-  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  margin-top: 50px;
   line-height: 150%;
+  margin-top: 50px;
+  padding: 12px;
+  width: 449px;
 }
 
 .description-quetions img {
-  position: fixed;
   height: 100.18px;
-  width: 100.09px;
   left: 28vw;
+  position: fixed;
   top: 10px;
+  width: 100.09px;
 }
 
 .question-text {
   align-items: center;
   color: black;
   display: flex;
-  font-family: 'Epilogue';
-  font-style: normal;
+  font-family: 'Epilogue' 'keyword';
   font-size: 16px;
+  font-style: normal;
   font-weight: 400;
   line-height: 150%;
   margin-top: 50px;
@@ -86,30 +86,30 @@
 }
 
 .timer {
-  font-family: "Verdana";
+  color: #ea5d5d;
+  font-family: 'Verdana' 'keyword';
+  font-size: 16px;
   font-style: normal;
   font-weight: 700;
-  font-size: 16px;
   margin-top: 90px;
-  color: #ea5d5d;
 }
 
 .question-category {
   background-color: #f9ba18;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 100px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   color: white;
-  font-family: 'Epilogue';
-  font-style: normal;
+  font-family: 'Epilogue' 'keyword';
   font-size: 17px;
+  font-style: normal;
   font-weight: 700;
   height: 45px;
-  width: 413px;
+  line-height: 150%;
   margin-top: -38px;
   margin-left: 5px;
   padding-left: 15px;
-  line-height: 150%;
   padding-top: 10px;
+  width: 413px;
 }
 
 .options {
@@ -122,16 +122,15 @@
 .options button {
   background-color: white;
   border: 1px solid white;
-  border: none;
   border-radius: 100px;
   color: black;
-  font-family: "Epilogue";
-  font-style: normal;
+  font-family: 'Epilogue' 'keyword';
   font-size: 16px;
+  font-style: normal;
   font-weight: 400;
   height: 55px;
-  width: 500px;
   line-height: 150%;
+  width: 500px;
 }
 
 .next {
@@ -140,7 +139,7 @@
   border-radius: 5px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   height: 45px;
-  margin-top: 30px;
   margin-left: -20px;
+  margin-top: 30px;
   width: 100px;
 }
