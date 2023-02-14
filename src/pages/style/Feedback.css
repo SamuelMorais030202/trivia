@@ -5,101 +5,96 @@
 }
 
 .img {
-  width: 200px;
   height: 150px;
-  margin-top: -42px;
+  width: 200px;
   margin-bottom: 22px;
+  margin-top: -42px;
 }
 
 .feedback {
-  width: 439px;
-  height: 250px;
-  margin: auto;
-  background: #FFFFFF;
-  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  background: white;
   border-radius: 10px;
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  height: 250px;
+  width: 439px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
 .feedback h1 {
-  color: #F9BA18;
-  margin-top: -27px;
-  margin-bottom: 30px;
+  color: #f9ba18;
   font-size: 35px;
+  margin-bottom: 30px;
+  margin-top: -27px;
 }
 
 .p{
+  color: #b5b5b5;
   font-family: 'Epilogue';
   font-style: normal;
-  font-weight: 700;
   font-size: 18px;
+  font-weight: 700;
   line-height: 150%;
   text-align: center;
-
-  color: #B5B5B5;
 }
 
 .worst {
   color: red;
   font-family: 'Epilogue';
   font-style: normal;
-  font-weight: 700;
   font-size: 30px;
+  font-weight: 700;
   line-height: 150%;
-  text-align: center;
   margin-bottom: 23px;
+  text-align: center;
 }
 
 .better {
-  color: #2FC18C;
+  color: #2fc18c;
   font-family: 'Epilogue';
   font-style: normal;
-  font-weight: 700;
   font-size: 30px;
+  font-weight: 700;
   line-height: 150%;
-  text-align: center;
   margin-bottom: 23px;
+  text-align: center;
 }
 
 .container-buttons {
+  gap: 15px;
+  justify-content: center;
   margin-top: 10px;
   display: flex;
-  justify-content: center;
-  gap: 15px;
 }
 
 .again {
-  background: #00D5E2;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #00d5e2;
   border-radius: 5px;
-  width: 200.5px;
-  height: 40px;
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: 'Epilogue';
   font-style: normal;
-  font-weight: 700;
   font-size: 16px;
+  font-weight: 700;
+  height: 40px;
+  width: 200.5px;
   line-height: 150%;
-
-  color: #FFFFFF;
+  color: white;
   border: none;
 }
 
 .btn-ranking {
-  background: #2FC18C;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #2fc18c;
+  border: none;
   border-radius: 5px;
-  width: 200.5px;
-  height: 40px;
-
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
   font-family: 'Epilogue';
   font-style: normal;
-  font-weight: 700;
   font-size: 16px;
+  font-weight: 700;
+  height: 40px;
+  width: 200.5px;
   line-height: 150%;
-
-  color: #FFFFFF;
-  border: none;
 }
