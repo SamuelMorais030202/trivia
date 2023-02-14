@@ -52,9 +52,9 @@
   background: white;
   border-radius: 10px;
   box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
-  font-family: 'Epilogue' 'keyword';
-  font-style: normal;
+  font-family: Times New Roman Times , serif;
   font-size: 16px;
+  font-style: normal;
   font-weight: 400;
   height: 278px;
   line-height: 150%;
@@ -75,7 +75,7 @@
   align-items: center;
   color: black;
   display: flex;
-  font-family: 'Epilogue' 'keyword';
+  font-family: Times New Roman Times , serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
@@ -87,7 +87,7 @@
 
 .timer {
   color: #ea5d5d;
-  font-family: 'Verdana' 'keyword';
+  font-family: Times New Roman Times , serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -99,14 +99,14 @@
   border-radius: 100px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   color: white;
-  font-family: 'Epilogue' 'keyword';
+  font-family: Times New Roman Times , serif;
   font-size: 17px;
   font-style: normal;
   font-weight: 700;
   height: 45px;
   line-height: 150%;
-  margin-top: -38px;
   margin-left: 5px;
+  margin-top: -38px;
   padding-left: 15px;
   padding-top: 10px;
   width: 413px;
@@ -124,7 +124,7 @@
   border: 1px solid white;
   border-radius: 100px;
   color: black;
-  font-family: 'Epilogue' 'keyword';
+  font-family: Times New Roman Times , serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;

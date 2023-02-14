@@ -23,10 +23,10 @@ class Header extends React.Component {
             { name }
           </p>
         </div>
-        <p data-testid="header-score" className="score">
+        <p className="score">
           <img src={ estrela } alt="icone de uma estrela" className="estrela" />
           <span>Pontos:</span>
-          { score }
+          <span data-testid="header-score">{ score }</span>
         </p>
       </header>
     );

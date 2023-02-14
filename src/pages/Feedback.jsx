@@ -48,17 +48,17 @@ class Feedback extends React.Component {
             {assertions < lowestScoreFeedback
               ? 'Could be better...' : 'Well Done!'}
           </p>
-          <p data-testid="feedback-total-question" className="p">
+          <p className="p">
             Você acertou:
             {' '}
-            { assertions }
+            <span data-testid="feedback-total-question">{ assertions }</span>
             {' '}
             pontos!
           </p>
-          <p data-testid="feedback-total-score" className="p">
+          <p className="p">
             Um total de:
             {' '}
-            { score }
+            <span data-testid="feedback-total-score">{ score }</span>
             {' '}
             pontos
           </p>
