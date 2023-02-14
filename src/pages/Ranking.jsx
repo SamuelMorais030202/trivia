@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import './style/Ranking.css';
+import trivia from '../images/trivia.png';
 
 class Ranking extends React.Component {
   state = {
@@ -19,35 +21,40 @@ class Ranking extends React.Component {
   render() {
     const { players } = this.state;
     return (
-      <div>
-        <h1 data-testid="ranking-title">Ranking</h1>
-        <button
-          type="button"
-          data-testid="btn-go-home"
-          onClick={ () => {
-            const { history } = this.props;
-            history.push('/');
-          } }
-        >
-          Play Again
-        </button>
-        <div>
-          {
-            players.map((player, index) => (
-              <div key={ index }>
-                <h4 data-testid={ `player-name-${index}` }>
-                  { player.userName }
-                </h4>
-                <p>
-                  Pontuação:
-                  {' '}
-                  <span data-testid={ `player-score-${index}` }>
-                    { player.score }
-                  </span>
-                </p>
-              </div>
-            ))
-          }
+      <div className="main-ranking">
+        <img src={ trivia } alt="trivia imagem" />
+        <div className="ranking-game">
+          <h1 data-testid="ranking-title">Ranking</h1>
+          <div className="players">
+            {
+              players.map((player, index) => (
+                <div key={ index }>
+                  <h4 data-testid={ `player-name-${index}` }>
+                    { player.userName }
+                  </h4>
+                  <p>
+                    &#11088;
+                    {' '}
+                    <span data-testid={ `player-score-${index}` }>
+                      { player.score }
+                    </span>
+                    {' '}
+                    pontos
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+          <button
+            type="button"
+            data-testid="btn-go-home"
+            onClick={ () => {
+              const { history } = this.props;
+              history.push('/');
+            } }
+          >
+            Play Again
+          </button>
         </div>
       </div>
     );

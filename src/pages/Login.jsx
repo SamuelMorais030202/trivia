@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { actionCreatorAddLogin } from '../redux/actions';
+import './style/Login.css';
+import trivia from '../images/trivia.png';
 
 class Login extends React.Component {
   state = {
@@ -34,12 +36,12 @@ class Login extends React.Component {
       .includes('@') && userEmail.includes('.com') && userName.length > number;
     return (
       <div className="page-login">
-        <div>
-          <h1>Trivia</h1>
-          <label htmlFor="name-input">
-            Nome:
+        <img src={ trivia } alt="logo trivia" />
+        <div className="form">
+          <label htmlFor="name-input" className="label-name">
             <input
               value={ userName }
+              placeholder="Nome do jogador"
               name="userName"
               onChange={ this.handleChange }
               type="text"
@@ -48,9 +50,9 @@ class Login extends React.Component {
             />
           </label>
           <label htmlFor="email-input">
-            Email:
             <input
               value={ userEmail }
+              placeholder="Email do jogador"
               name="userEmail"
               onChange={ this.handleChange }
               type="text"
@@ -60,6 +62,7 @@ class Login extends React.Component {
           </label>
           <button
             data-testid="btn-play"
+            className="play"
             disabled={ !disabled }
             onClick={ () => this.handleClick() }
           >
@@ -67,6 +70,7 @@ class Login extends React.Component {
           </button>
           <button
             data-testid="btn-settings"
+            className="settings"
             type="button"
             onClick={ () => { history.push('/settings'); } }
           >

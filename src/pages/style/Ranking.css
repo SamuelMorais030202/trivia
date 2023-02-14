@@ -1,0 +1,71 @@
+.main-ranking {
+  align-items: center;
+  background-image: url('../../images/background.png');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+}
+
+.main-ranking img {
+  height: 180px;
+  margin-bottom: 28px;
+  width: 200px;
+}
+
+.ranking-game {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 1px 4px 13px 2px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 439px;
+}
+
+.ranking-game h1 {
+  color: #f9ba18;
+  font-size: 35px;
+  margin-bottom: 30px;
+  margin-top: -36px;
+}
+
+.ranking-game button {
+  background: #2fc18c;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: white;
+  font-family: Times New Roman , sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  height: 35px;
+  line-height: 150%;
+  margin-top: 50px;
+  width: 386px;
+}
+
+.players {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.players div {
+  align-items: center;
+  background: #ebebeb;
+  border-radius: 100px;
+  display: flex;
+  height: 45px;
+  justify-content: space-around;
+  width: 332px;
+}
+
+.players div h4 {
+  font-family: Times New Roman , sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 150%;
+}
